@@ -1,0 +1,13 @@
+You Chen 436707
+Ke Xu 435011
+
+link to the front page:
+http://ec2-54-86-20-162.compute-1.amazonaws.com:8000/client
+
+
+brief description of what we did for creative portion:
+- Chat room is deleted when the owner quits the room. Other users in the room will automatically leave the room.
+- Users in the room can share files by uploading. A url is provided to the users in the chat room to view the uploaded file. To apply this part, need to also run static_server.js on a different port number.
+
+login details:
+type any username to log in.
