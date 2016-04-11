@@ -451,6 +451,7 @@
          user=undefined;
          room=undefined;
          updateMsgPanel();
+         document.getElementById('users-list').innerHTML="";
          document.getElementById("loginBtn").textContent="Login";
          document.getElementById("loginBtn").setAttribute("onclick", "login()");
          document.getElementById("header").textContent="Welcome to chat room!";

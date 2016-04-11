@@ -136,6 +136,7 @@ io.sockets.on("connection", function(socket){
         if (data.inRoom) {
             socket.leave(data.room);
             rooms[data.room].users.splice(rooms[data.room].users.indexOf(data.username), 1);
+            io.to(data.room).emit('updateUsersList', {"users":rooms[data.room].users});
             io.to(data.room).emit('message_to_client', {"message":data.username + " left the room.", "sender": "System"});
         }
         
@@ -144,6 +145,7 @@ io.sockets.on("connection", function(socket){
         //        destroyRoom(data.room);
         //    }
         //}
+        socket.emit('updateRooms', {"rooms":rooms});
         socket.emit('loggedout', {"username":data.username});
     });
     
