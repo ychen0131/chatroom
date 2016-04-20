@@ -199,13 +199,16 @@ io.sockets.on("connection", function(socket){
             }
         }
 		if (!isBlocked) {
+			if(rooms[roomIndex].pwd!==data.pwd){
+            	socket.emit('joinPrivate_to_client',{"success":false, "message": "Wrong password!"});
+				return;
+			}
             rooms[roomIndex].users.push(data.user);
 			socket.join(data.roomName);
 			io.to(data.roomName).emit('updateUsersList',{"users": rooms[roomIndex].users});
 			socket.emit('joinPrivate_to_client', {"success":true, "users":rooms[roomIndex].users, "room": data.roomName, "rooms":rooms});
 			io.to(data.roomName).emit('message_to_client', {"message": data.user+ " joined the room.", "sender": "System"});
-		} else if (rooms[roomIndex].pwd!==data.pwd) {
-            socket.emit('joinPrivate_to_client',{"success":false, "message": "Wrong password!"});
+// 		} else if (rooms[roomIndex].pwd!==data.pwd) {
 		} else {
             socket.emit('joinPrivate_to_client',{"success":false, "message":"You are blocked by the room owner."});
 		}
